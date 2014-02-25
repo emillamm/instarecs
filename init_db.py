@@ -1,40 +1,40 @@
 #!/usr/bin/env python
+import json
+from sqlalchemy import *
+import fields
 
-from ConfigParser import SafeConfigParser
-import psycopg2
-import sys
-import pprint
+conn_string = fields.dbtype + '://' + fields.dbuser + ':' +  fields.dbpass + '@' + fields.dbhost + '/' + fields.dbname;
+engine = create_engine(conn_string)
 
-def setup_db():
-    parser = SafeConfigParser()
-    parser.read('settings.conf')
+connection = engine.connect()
 
-    K = int(parser.get('algorithm', 'K'))
+metadata = MetaData()
 
-    conn_string = "host='" + parser.get('database', 'host') + "' dbname='" + parser.get('database', 'dbname') + "' user='" + parser.get('database', 'user') + "' password='" + parser.get('database', 'password') + "'" 
-    conn = psycopg2.connect(conn_string)
-    cursor = conn.cursor()
-    val_string = ""
-    for i in xrange(K): val_string += "val" + str(i) + " NUMERIC DEFAULT 0, "
-    create_umat = ("DROP TABLE IF EXISTS umat;"
-                    "CREATE TABLE umat ("
-                        "id SERIAL NOT NULL PRIMARY KEY,"
-                        "uid integer NOT NULL," + 
-                        val_string[:-2] + 
-                    ");")
-    
-    create_umat = ("DROP TABLE IF EXISTS vmat;"
-                    "CREATE TABLE vmat ("
-                        "id SERIAL NOT NULL PRIMARY KEY,"
-                        "vid integer NOT NULL," + 
-                        val_string[:-2] + 
-                    ");")
-    
-    cursor.execute(create_umat)
-    cursor.execute("insert into umat (uid, val1) values (1,2);")
-    cursor.execute("SELECT * FROM umat")
-    records = cursor.fetchall()
-    pprint.pprint(records)
-   
-if __name__ == '__main__':
-    setup()
+col_string = ""
+for i in xrange(fields.K):
+    col_string += ("Column('val" + str(i) + "', Numeric, nullable=False), ")
+
+evalstr = ("umat = Table('umat', metadata,"
+    "Column('id', Integer, nullable=False, primary_key=True),"
+    "Column('uid', Integer, nullable=False),"
+    + col_string[:-2]
+    + ")"
+)
+exec(evalstr)
+
+evalstr = ("vmat = Table('vmat', metadata,"
+    "Column('id', Integer, nullable=False, primary_key=True),"
+    "Column('vid', Integer, nullable=False),"
+    + col_string[:-2]
+    + ")"
+)
+exec(evalstr)
+
+metadata.drop_all(engine)
+metadata.create_all(engine)
+
+#Insert items into table
+#for row in json_object:
+    #ins = item_store.insert().values(id=row['id'], title=row['title'], year=row['year'], count=row['count'], rating=row['rating']) 
+    #connection.execute(ins)
+
