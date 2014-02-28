@@ -2,36 +2,27 @@
 import json
 from sqlalchemy import *
 import fields
+import random
+from model import *
 
-conn_string = fields.dbtype + '://' + fields.dbuser + ':' +  fields.dbpass + '@' + fields.dbhost + '/' + fields.dbname;
-engine = create_engine(conn_string)
 
-connection = engine.connect()
-
-metadata = MetaData()
-
-col_string = ""
-for i in xrange(fields.K):
-    col_string += ("Column('val" + str(i) + "', Numeric, nullable=False), ")
-
-evalstr = ("umat = Table('umat', metadata,"
-    "Column('id', Integer, nullable=False, primary_key=True),"
-    "Column('uid', Integer, nullable=False),"
-    + col_string[:-2]
-    + ")"
-)
-exec(evalstr)
-
-evalstr = ("vmat = Table('vmat', metadata,"
-    "Column('id', Integer, nullable=False, primary_key=True),"
-    "Column('vid', Integer, nullable=False),"
-    + col_string[:-2]
-    + ")"
-)
-exec(evalstr)
 
 metadata.drop_all(engine)
 metadata.create_all(engine)
+
+s = text("SELECT " + fields.itemtable + ".id FROM " + fields.itemtable)
+result = connection.execute(s).fetchall()
+for row in result:
+    vid = row[0]
+    #insstr = (id=1, uid=1, val1=1, val2=1)
+    #ins = vmat.insert().values(insstr)
+    insstr = "vid=" + str(vid) + ","
+    rand = [random.random() for i in xrange(fields.K)]
+    for i in xrange(fields.K):
+        insstr += ("val" + str(i) + "=" + str(rand[i]) + ",")
+    insstr_eval = "ins = vmat.insert().values(" + insstr[:-2] + ")"
+    exec(insstr_eval)
+    connection.execute(ins)
 
 #Insert items into table
 #for row in json_object:
