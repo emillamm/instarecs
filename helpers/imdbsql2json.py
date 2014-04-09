@@ -9,10 +9,10 @@ def make_json():
     engine = create_engine('mysql://emil:mrmemorex@50.17.252.200/imdb')
     connection = engine.connect()
     q = """select t.title, t.production_year as year, m1.info as count, m2.info as rating, m1.movie_id as id
-    from title t
+    from title t 
     inner join movie_info_idx m1 on t.id=m1.movie_id and m1.info_type_id = 100
     inner join movie_info_idx m2 on t.id=m2.movie_id and m2.info_type_id = 101
-    where t.kind_id = 1 and t.production_year > 1995 and m1.info > 250000  limit 150;"""
+    where t.kind_id = 1 and m1.info > 200000 and m1.info < 250000 order by m1.info asc limit 100;"""
     result = engine.execute(q)
 
     item_list = []
