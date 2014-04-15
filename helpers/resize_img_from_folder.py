@@ -1,5 +1,13 @@
 #!/usr/bin/env python
 
+"""Resize images in folder
+
+This script resizes all the jpeg images in a folder named
+images to a size of 300 x 300 px. 
+
+NOTE: This file does not handle all errors.  
+"""
+
 import PIL
 from PIL import Image
 import os

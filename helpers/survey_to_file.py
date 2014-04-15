@@ -1,3 +1,17 @@
+"""Retrieving all choice updates from all users
+
+This module simply takes all updates that has been made so far
+and puts them in a text called "survey.txt file where each line has the format:
+
+<uid> <vid1> <vid2>
+
+Remember that vid1 is then one that is preferred ocer vid2. 
+An update is simply a call to the update_choice function in api.py. 
+
+NOTE: This file does not handle all errors.  
+"""
+
+
 from pymongo import MongoClient
 import os
 

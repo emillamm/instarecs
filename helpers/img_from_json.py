@@ -1,11 +1,19 @@
 #!/usr/bin/env python
+
+"""Get image posters from omdbapi
+
+This module retrieves images for all movies
+in the file "movies.json" and stores them in folder
+called images. 
+
+Todo: Use imdb_ids.txt instead of movies.json
+
+NOTE: This file does not handle all errors.  
+"""
 import urllib2
 import json
 import pprint
 import os
-
-"""Get image poster from omdbapi"""
-
 
 def download_image(movie_name, movie_year, movie_id):
     content_url = "http://www.omdbapi.com/?t=" + movie_name + "&y=" + movie_year
@@ -27,6 +35,7 @@ def download_image(movie_name, movie_year, movie_id):
             pass
 
     if(url!=""):
+        # Get images with a height of 300 pixels. 
         url = url.replace("SX300.jpg", "SY300.jpg")
         print(url)
         file_name = "images/" + movie_id + ".jpg"
@@ -40,20 +49,18 @@ def download_image(movie_name, movie_year, movie_id):
             pass
 
 def write_error(msg):
+    # Write an error message if the image for some reason cant be found
     with open("img_errors.txt", "a") as f:
         f.write(msg.encode('utf8') + "\n")
         f.close
         print(msg.encode('utf8'))
 
-json_data = open('movies.json','r')
-json_object = json.load(json_data)
-directory = "images"
-if not os.path.exists(directory):
-    os.makedirs(directory)
-count = 0
-for row in json_object:
-    #if count >= 0 and count < 3 and not os.access(directory + "/" + str(row['id']) + ".jpg", os.R_OK):
-    if not os.access("images/" + str(row['id']) + ".jpg", os.R_OK):
-
-        download_image(row['title'].replace(' ','+'), str(row['year']), str(row['id']))
-    count = count + 1
+if __name__ == '__main__':
+    json_data = open('movies.json','r')
+    json_object = json.load(json_data)
+    directory = "images"
+    if not os.path.exists(directory):
+        os.makedirs(directory)
+    for row in json_object:
+        if not os.access("images/" + str(row['id']) + ".jpg", os.R_OK):
+            download_image(row['title'].replace(' ','+'), str(row['year']), str(row['id']))
