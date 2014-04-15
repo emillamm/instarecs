@@ -139,7 +139,7 @@ def get_rank(uid):
     print nns
     return nns
 
-def get_random_pair(uid):
+def get_random_pair(uid): 
     """Returns a pair of items to be compared by the user. 
 
     The items is randomly chosen with the constraint of never showing 
