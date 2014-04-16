@@ -3,6 +3,7 @@ instarecs
 
 A shortcut to powerful recommendations using pairwise comparisons instead of ratings. A live implementation of the algorithm can be found on [flicked.co](http://flicked.co/). 
 ![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/testresults.png)
+Graph explained in the Theory section
 
 # Intro #
 Instarecs is a python implementation of a collaborative filtering algorithm that is based on pairwise comparisons instead of ratings (Usually collaborative filters relies on ratings or likes/dislikes). The purpose of using comparisons instead of ratings, is to eliminate the bias that typically is associated with ratings. 
@@ -53,4 +54,11 @@ print result
 ```
 
 # Theory #
-coming soon
+## Algorithm ##
+Coming soon
+
+## Results ##
+The image on top of the page, demonstrates how instarecs performs on a real world dataset. The graph should be interpreted as such:
+Given N items and M users, present the each user with a pair of items and let the user choose which one she likes the most. Compare her choice with the a "guess" made by the algorithm. The guess is simply made by choosing the one of two items that has the best rank. 
+
+The dataset used is the public available [Jester](http://goldberg.berkeley.edu/jester-data/) dataset that consists of 100 jokes rated by 24,983 users on a rating scale from -10 to +10 (only a subset of 700 users were used). A comparison between two items was simulated by considering the difference in rating scores between the items. 
