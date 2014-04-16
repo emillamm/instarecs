@@ -1,7 +1,8 @@
 instarecs
 =========
 
-A shortcut to powerful recommendations using pairwise comparisons instead of ratings. A live implementation of the algorithm can be found on flicked.co. 
+A shortcut to powerful recommendations using pairwise comparisons instead of ratings. A live implementation of the algorithm can be found on [flicked.co](http://flicked.co/). 
+![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/testresults.png)
 
 # Intro #
 Instarecs is a python implementation of a collaborative filtering algorithm that is based on pairwise comparisons instead of ratings (Usually collaborative filters relies on ratings or likes/dislikes). The purpose of using comparisons instead of ratings, is to eliminate the bias that typically is associated with ratings. 
@@ -10,10 +11,10 @@ Instarecs is purely written in Python and all data is stored in MongoDB.
 
 # Prerequisites #
 Following Python libraries are needed: 
-- annoy (also depends on Boost)
-- pymongo
-- numpy
-- jsonrpclib
+- [annoy](https://github.com/spotify/annoy) (also depends on Boost)
+- [pymongo](https://github.com/mongodb/mongo-python-driver)
+- [numpy](http://www.numpy.org/)
+- [jsonrpclib](https://github.com/joshmarshall/jsonrpclib)
 
 An installation of MongoDB is also required. 
 
