@@ -20,8 +20,9 @@ An installation of MongoDB is also required.
 # Setup #
 To try out instarecs, make sure that MongoDB is running and then simply do the following:
 - from the instarecs directory, run the command `mongoimport -d movie_db -c movies --jsonArray movies.json`
-- run `python demo.py`. 
+- run `python demo_server.py`. 
 This will initialize instarecs with a small movie data set from IMDB and start the server for you. 
+Then run `python demo_client.py` in a separate new terminal to try out a few comparisons. 
 
 Alternatively you can: 
 - Set the `item_db_name` and `item_collection_name` to the name of a db and collection of your choice. Then run `python init_db.py`.

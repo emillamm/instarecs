@@ -1,5 +1,4 @@
 #!/usr/bin/env python
-from lib import fields
 from lib import init_db
 from lib import server
 """Demo for trying out instarecs using a small IMDB dataset"""

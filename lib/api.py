@@ -38,6 +38,8 @@ def add_user(uid):
     except TypeError:
         print "Unable to insert user given uid"
         return False
+    # Small hack for initializeing the item queue
+    get_random_pair(uid)
     return True
 
 def update_choice(vid1, vid2, uid):
@@ -117,6 +119,7 @@ def get_rank(uid):
     # It removes the last 15 items from the ANN tree, so they will never be recommended
     # for the user. This is done to make sure the user only sees new items in the 
     # recommended list (assuming 15 is the number of comparisons the user has made). 
+    # This is sort of a hack and can be removed/modified later on if necessary.
     ids[-15:] = []
     print ids
     id_dict = {}
