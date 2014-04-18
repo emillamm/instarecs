@@ -53,14 +53,13 @@ result = server.get_rank(1)
 print result
 ```
 
-# Theory #
-## Algorithm ##
-![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/theory.jpg)
-
-## Results ##
+# Test results #
 The image on top of the page, demonstrates how instarecs performs on a real world dataset. The graph should be interpreted as such:
 Given N items and M users, present the each user with a pair of items and let the user choose which one she likes the most. Compare her choice with the a "guess" made by the algorithm. The guess is simply made by choosing the one of two items that has the best rank. 
 
 So the chart shows that after a user has evaluated around 14 pairs, the algorithm can predict the users next choice with an accuracy of approximately 60%. 
 
 The dataset used is the public available [Jester](http://goldberg.berkeley.edu/jester-data/) dataset that consists of 100 jokes rated by 24,983 users on a rating scale from -10 to +10 (only a subset of 700 users were used). A comparison between two items was simulated by considering the difference in rating scores between the items. This is not the optimal kind of dataset, but it is sufficient to demonstrates capabilities of the algorithm. 
+
+# Theory #
+![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/theory.jpg)
