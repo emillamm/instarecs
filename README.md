@@ -3,7 +3,7 @@ instarecs
 
 A shortcut to powerful recommendations using pairwise comparisons instead of ratings. A live implementation of the algorithm can be found on [flicked.co](http://flicked.co/). 
 ![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/testresults.png)
-Chart explained in the "Test Results"
+Instarecs can predict your users taste in products, music, videos etc., with an accuracy of ~60%, after the user has performed ~14 comparisons between pairs of products. More about this in the Test results section. 
 
 # Intro #
 Instarecs is a python implementation of a collaborative filtering algorithm that is based on pairwise comparisons instead of ratings (Usually collaborative filters relies on ratings or likes/dislikes). The purpose of using comparisons instead of ratings, is to eliminate the bias that typically is associated with ratings. 
