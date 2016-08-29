@@ -1,7 +1,7 @@
 instarecs
 =========
 
-A shortcut to powerful recommendations using pairwise comparisons instead of ratings. A live implementation of the algorithm can be found on [flicked.co](http://flicked.co/). 
+A shortcut to powerful recommendations using pairwise comparisons instead of ratings. 
 ![Prediction accuracy](https://raw.github.com/emillamm/instarecs/master/testresults.png)
 Instarecs can predict your users taste in products, music, videos etc., with an accuracy of ~60%, after the user has performed ~14 comparisons between pairs of products. More about this in the [Test Results](#test-results). 
 
